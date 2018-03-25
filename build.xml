@@ -1,14 +1,26 @@
-<project name="AntExample1" default="compile" basedir=".">
+<project name="AntExample1" default="war" basedir=".">
 	<target name="clean">
 	<delete dir ="classes"/>
+	<delete dir ="dist"/>
 	</target>
 	  
 	<target name="init" depends="clean">
 	<mkdir dir="classes"/>
+	<mkdir dir="dist"/>
 	</target>
 	
 	<target name="compile" depends="init">
 	<javac srcdir="src" destdir="classes"/>
 	</target>
+	
+	<target name="war" depends="compile">
+		<war destfile="dist/AntExample.war" webxml="WebContent/WEB-INF/web.xml">
+			<fileset dir="WebContent"/>
+			<lib dir="WebContent/WEB-INF/lib"/>
+			<classes dir="classes"/>
+		</war>	
+	</target>
+	
+	
 </project>
 	
